@@ -1,0 +1,36 @@
+.footer {
+  margin-top: var(--space-6);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.impressions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.count {
+  color: var(--color-amber);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.aside {
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  color: var(--color-paper);
+}
