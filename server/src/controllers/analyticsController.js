@@ -1,4 +1,5 @@
 import { STAT_EVENTS } from '../models/DailyStat.js';
+import { getCvDownloadReport } from '../services/cvDownloadService.js';
 import { getSummary, getTotal, recordEvent } from '../services/statsService.js';
 import { HttpError } from '../utils/HttpError.js';
 
@@ -25,4 +26,9 @@ export async function getPublicTotal(_req, res) {
 export async function getPrivateSummary(req, res) {
   const days = Math.min(Math.max(Number(req.query.days) || 30, 1), 365);
   res.json(await getSummary(days));
+}
+
+export async function getCvDownloads(req, res) {
+  const days = Math.min(Math.max(Number(req.query.days) || 30, 1), 365);
+  res.json(await getCvDownloadReport(days));
 }

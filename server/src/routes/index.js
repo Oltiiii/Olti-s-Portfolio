@@ -2,6 +2,7 @@ import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
 import mongoose from 'mongoose';
 import {
+  getCvDownloads,
   getPrivateSummary,
   getPublicTotal,
   trackVisit,
@@ -31,5 +32,6 @@ router.get('/cv', asyncHandler(downloadCv));
 router.post('/analytics/visit', trackingLimiter, asyncHandler(trackVisit));
 router.get('/analytics/total', asyncHandler(getPublicTotal));
 router.get('/analytics/summary', requireAdminKey, asyncHandler(getPrivateSummary));
+router.get('/analytics/cv-downloads', requireAdminKey, asyncHandler(getCvDownloads));
 
 export default router;

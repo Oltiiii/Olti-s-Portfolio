@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>CV Downloads</title>
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="top">
+        <div>
+          <h1>CV downloads</h1>
+          <p class="muted" id="subtitle">Where your CV was downloaded from</p>
+        </div>
+        <div class="controls" id="controls" hidden>
+          <div class="segmented" role="group" aria-label="Time range">
+            <button type="button" data-days="7">7d</button>
+            <button type="button" data-days="30" aria-pressed="true">30d</button>
+            <button type="button" data-days="90">90d</button>
+            <button type="button" data-days="365">1y</button>
+          </div>
+          <button type="button" class="ghost" id="refresh">Refresh</button>
+          <button type="button" class="ghost" id="logout">Sign out</button>
+        </div>
+      </header>
+
+      <form class="card login" id="login" hidden>
+        <label for="key">Admin key</label>
+        <p class="muted">The <code>ADMIN_KEY</code> value from your server environment (Render → Environment).</p>
+        <div class="row">
+          <input id="key" type="password" autocomplete="current-password" required />
+          <button type="submit">Open dashboard</button>
+        </div>
+        <p class="error" id="login-error" role="alert"></p>
+      </form>
+
+      <section id="dashboard" hidden>
+        <div class="tiles">
+          <div class="card tile"><span class="muted">Downloads</span><strong id="t-total">–</strong></div>
+          <div class="card tile"><span class="muted">Countries</span><strong id="t-countries">–</strong></div>
+          <div class="card tile"><span class="muted">Top location</span><strong id="t-top">–</strong></div>
+          <div class="card tile"><span class="muted">Last download</span><strong id="t-last">–</strong></div>
+        </div>
+
+        <div class="card">
+          <h2>Downloads per day</h2>
+          <div id="daily" class="daily"></div>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>By country</h2>
+            <ol id="countries" class="bars"></ol>
+          </div>
+          <div class="card">
+            <h2>By city</h2>
+            <ol id="cities" class="bars"></ol>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Recent downloads</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>When</th><th>Location</th><th>Device</th><th>Came from</th></tr>
+              </thead>
+              <tbody id="recent"></tbody>
+            </table>
+          </div>
+          <p class="muted small">Location is estimated from the visitor's IP address (city-level, sometimes only country). IPs are not stored.</p>
+        </div>
+      </section>
+    </main>
+    <div class="tooltip" id="tooltip" hidden></div>
+    <script src="dashboard.js" type="module"></script>
+  </body>
+</html>

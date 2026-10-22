@@ -19,10 +19,11 @@ olti-portfolio/
 │       └── styles/global.css   design tokens and base styles
 ├── server/                     Express API
 │   ├── assets/                 the CV PDF that gets downloaded
+│   ├── public/admin/           private CV download dashboard (served at /admin)
 │   └── src/
 │       ├── config/             env variables, MongoDB connection
-│       ├── models/             DailyStat (Mongoose)
-│       ├── services/           statsService (database logic)
+│       ├── models/             DailyStat, CvDownload (Mongoose)
+│       ├── services/           statsService, cvDownloadService (database logic)
 │       ├── controllers/        cv, analytics
 │       ├── routes/             /api routes
 │       ├── middleware/         admin key check, error handling
@@ -41,12 +42,16 @@ olti-portfolio/
 | POST   | `/api/analytics/visit`   | Counts a page view (once per browser session)          |
 | GET    | `/api/analytics/total`   | Total page views (shown in the footer)                 |
 | GET    | `/api/analytics/summary` | Private stats; needs header `x-admin-key: <ADMIN_KEY>` |
+| GET    | `/api/analytics/cv-downloads?days=30` | Where the CV was downloaded (country, city, device, referrer); needs `x-admin-key` |
 
 To check your stats after deploying:
 
 ```bash
 curl -H "x-admin-key: YOUR_ADMIN_KEY" https://YOUR-API.onrender.com/api/analytics/summary
 ```
+
+Or open the CV download dashboard at `https://YOUR-API.onrender.com/admin/` and enter your `ADMIN_KEY`.
+It shows where each download came from, estimated from the visitor's IP with an offline lookup (`geoip-lite`); IPs are never stored.
 
 ## Run it on your computer
 
